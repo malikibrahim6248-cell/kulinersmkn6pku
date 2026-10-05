@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuliner SMKN 6 Pekanbaru - Teaching Factory</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- 1. ANNOUNCEMENT BAR PROMO -->
+    <div class="announcement-bar">
+        <p>🎓 Sajian Karya Siswa Tata Boga SMKN 6 Pekanbaru! Gunakan kode <strong>SMKHEBAT</strong> untuk diskon Rp 5.000! 🚀</p>
+    </div>
+
+    <!-- NAVBAR -->
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <span>Kuliner<strong>SMKN6Pku</strong></span>
+            </div>
+            
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" placeholder="Cari makanan, minuman, atau kue..." onkeyup="filterMenu()">
+            </div>
+
+            <!-- STATUS TOKO & KERANJANG -->
+            <div class="header-right">
+                <div class="store-status" id="storeStatus">
+                    <span class="status-dot"></span>
+                    <span id="statusText">Cek Status...</span>
+                </div>
+                <div class="cart-btn" onclick="toggleCart()">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span id="cartCount">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-text">
+            <h2>Kantin & Teaching Factory SMKN 6 Pekanbaru</h2>
+            <p>Sajian lezat, higienis, dan berkualitas hasil karya kreatif siswa-siswi Tata Boga.</p>
+            <a href="#menuSection" class="btn-primary">Pesan Sekarang</a>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features">
+        <div class="feature-card">
+            <i class="fa-solid fa-utensils"></i>
+            <div>
+                <h4>Karya Siswa Boga</h4>
+                <p>Dibuat langsung dengan standar higienis</p>
+            </div>
+        </div>
+        <div class="feature-card">
+            <i class="fa-solid fa-school"></i>
+            <div>
+                <h4>Area SMKN 6 Pekanbaru</h4>
+                <p>Siap antar ke kelas & ruang guru</p>
+            </div>
+        </div>
+        <div class="feature-card">
+            <i class="fa-solid fa-tags"></i>
+            <div>
+                <h4>Harga Ramah Kantong</h4>
+                <p>Harga pas untuk siswa & guru</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MENU CONTAINER -->
+    <main class="container" id="menuSection">
+        <div class="section-title">
+            <h2 class="section-heading">Menu Favorit SMKN 6</h2>
+            <div class="filter-wrapper" style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <div class="category-buttons">
+                    <button class="cat-btn active" onclick="filterCategory('all', this)">Semua</button>
+                    <button class="cat-btn" onclick="filterCategory('makanan', this)">Makanan</button>
+                    <button class="cat-btn" onclick="filterCategory('minuman', this)">Minuman</button>
+                    <button class="cat-btn" onclick="filterCategory('camilan', this)">Kue & Bakery</button>
+                </div>
+                <!-- FITUR SORTING -->
+                <select id="sortMenu" onchange="applyFilters()" style="padding: 8px 12px; border-radius: 20px; border: 1px solid #e0e0e0; outline: none; font-size: 0.85rem; cursor: pointer;">
+                    <option value="default">Urutkan: Default</option>
+                    <option value="price-low">Harga: Termurah</option>
+                    <option value="price-high">Harga: Termahal</option>
+                    <option value="rating">Rating Tertinggi</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="menu-grid" id="menuContainer">
+            <!-- Render via JS -->
+        </div>
+    </main>
+
+    <!-- REVIEWS & FAQ -->
+    <section class="reviews-section">
+        <div class="container">
+            <h2 class="section-heading">Kata Warga Sekolah</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p>"Roti buatan jurusan Boga SMKN 6 rasanya sekelas bakery ternama! Pas banget buat sarapan di sekolah."</p>
+                    <div class="reviewer-info">
+                        <strong>Guru SMKN 6 Pekanbaru</strong>
+                        <span>Majelis Guru</span>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p>"Ayam Gepreknya juara, harganya terjangkau banget buat kantong siswa. Recommended!"</p>
+                    <div class="reviewer-info">
+                        <strong>Rian</strong>
+                        <span>Siswa Jurusan RPL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section container">
+        <h2 class="section-heading">Pertanyaan Umum (FAQ)</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    Bagaimana cara memesan makanan/minuman?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Pilih menu favoritmu, masukkan ke keranjang, dan kirimkan pesanan via WhatsApp ke tim Kantin/TEFA SMKN 6 Pekanbaru.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    Apakah pesanan bisa diantar ke kelas/ruang guru?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Ya, kami melayani pengantaran langsung ke area lingkungan sekolah SMKN 6 Pekanbaru saat jam istirahat.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    Jam berapa Teaching Factory / Kantin Buka?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Kami buka setiap hari sekolah (Senin - Jumat) mulai pukul 07:30 WIB hingga 16:00 WIB.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL KERANJANG -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h3><i class="fa-solid fa-cart-shopping"></i> Keranjang Belanja</h3>
+                <span class="close-btn" onclick="toggleCart()">&times;</span>
+            </div>
+            <div class="cart-body" id="cartItems">
+                <!-- Render Cart Items -->
+            </div>
+            <div class="voucher-section">
+                <div class="voucher-input-group">
+                    <input type="text" id="voucherCode" placeholder="Kode Promo (cth: SMKHEBAT)">
+                    <button onclick="applyVoucher()">Gunakan</button>
+                </div>
+                <div id="voucherMessage" class="voucher-msg"></div>
+            </div>
+            <div class="cart-footer">
+                <div class="price-summary">
+                    <div class="discount-row" id="discountRow" style="display:none;">
+                        <span>Diskon:</span>
+                        <strong id="discountTotal" style="color:#27ae60;">-Rp 0</strong>
+                    </div>
+                    <div class="total-price">
+                        <span>Total Belanja:</span>
+                        <strong id="cartTotal">Rp 0</strong>
+                    </div>
+                </div>
+                <div class="cart-actions">
+                    <button class="btn-clear" onclick="clearCart()">Kosongkan</button>
+                    <button class="btn-checkout" onclick="openOrderModal()">Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DETAIL PRODUK -->
+    <div class="cart-modal" id="productDetailModal">
+        <div class="cart-content" style="max-width: 450px;">
+            <div class="cart-header">
+                <h3 id="modalTitle">Detail Produk</h3>
+                <span class="close-btn" onclick="closeDetailModal()">&times;</span>
+            </div>
+            <div class="cart-body">
+                <img id="modalImage" src="" alt="Menu" class="modal-product-img">
+                <p id="modalDesc" class="modal-product-desc"></p>
+                <div id="modalPrice" class="modal-product-price"></div>
+
+                <div class="custom-group" id="spicyGroup">
+                    <label>Tingkat Kepedasan:</label>
+                    <select id="spicyLevel">
+                        <option value="Tidak Pedas">Tidak Pedas</option>
+                        <option value="Sedang" selected>Sedang</option>
+                        <option value="Pedas Banget">Pedas Banget (+Rp 1.000)</option>
+                    </select>
+                </div>
+
+                <div class="custom-group" id="toppingGroup">
+                    <label>Tambahan Topping:</label>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="topEgg" value="2000">
+                        <label for="topEgg">Telur Goreng (+Rp 2.000)</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="topCheese" value="2000">
+                        <label for="topCheese">Ekstra Sambal (+Rp 1.000)</label>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-footer">
+                <button class="btn-primary btn-block" id="btnAddToCartCustom">Tambah ke Keranjang</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL CHECKOUT -->
+    <div class="cart-modal" id="orderModal">
+        <div class="cart-content" style="max-width:480px;">
+            <div class="cart-header">
+                <h3><i class="fa-solid fa-file-invoice-dollar"></i> Formulir Pemesanan</h3>
+                <span class="close-btn" onclick="closeOrderModal()">&times;</span>
+            </div>
+            <div class="cart-body">
+                <div class="form-group">
+                    <label>Nama Lengkap / Jurusan / Kelas *</label>
+                    <input type="text" id="custName" placeholder="Contoh: Rian - XII RPL 1 / Bu Siti (Guru)">
+                </div>
+                <div class="form-group">
+                    <label>Lokasi Pengantaran di Sekolah *</label>
+                    <textarea id="custAddress" rows="2" placeholder="Contoh: Ruang Guru / Gedung RPS RPL / Gazebo Depan Kantor"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Opsi Pengambilan / Layanan</label>
+                    <select id="deliveryArea" onchange="updateSummaryOrder()">
+                        <option value="0">Ambil Mandiri ke Kantin Boga (Gratis)</option>
+                        <option value="2000">Antar ke Kelas / Ruangan (+Rp 2.000)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Metode Pembayaran</label>
+                    <select id="paymentMethod" onchange="toggleQrisOption()">
+                        <option value="QRIS / E-Wallet / Bank">QRIS / E-Wallet</option>
+                        <option value="Bayar Tunai di Kantin / Saat COD">Bayar Tunai (Cash)</option>
+                    </select>
+                </div>
+                
+                <!-- Opsi QRIS -->
+                <div id="qrisContainer" style="text-align:center; background:#f8f9fa; padding:15px; border-radius:10px; border:1px dashed #ddd; margin-bottom:15px;">
+                    <p style="font-size:0.85rem; font-weight:bold; margin-bottom:8px; color:#2c3e50;">Scan QRIS TEFA SMKN 6 Pekanbaru:</p>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=SMKN6PekanbaruKuliner" alt="QRIS" style="width:150px; border-radius:8px; border:1px solid #ccc;">
+                    <p style="font-size:0.75rem; color:#666; margin-top:5px;">Mendukung GoPay, OVO, Dana, ShopeePay, & Bank.</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Catatan Pesanan (Opsional)</label>
+                    <input type="text" id="custNotes" placeholder="Contoh: Antar pas jam istirahat pertama jam 10:00">
+                </div>
+
+                <div class="checkout-summary">
+                    <div><span>Subtotal:</span><span id="summarySubtotal">Rp 0</span></div>
+                    <div><span>Layanan Antar:</span><span id="summaryOngkir">Rp 0</span></div>
+                    <div id="summaryDiskonRow" style="display:none; color:#27ae60;"><span>Diskon:</span><span id="summaryDiskon">-Rp 0</span></div>
+                    <hr>
+                    <div class="final-total"><strong>Total Pembayaran:</strong><strong id="summaryFinalTotal">Rp 0</strong></div>
+                </div>
+            </div>
+            <div class="cart-footer">
+                <button class="btn-checkout wa-btn" id="btnSubmitOrder" onclick="checkoutWA()">
+                    <i class="fa-brands fa-whatsapp"></i> Kirim Pesanan via WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FLOATING WA & TOAST -->
+    <a href="https://wa.me/6287862227946" target="_blank" class="floating-wa" title="Hubungi Kantin SMKN 6 Pekanbaru">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <div class="toast" id="toastNotification">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="toastMsg">Notifikasi</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
